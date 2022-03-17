@@ -1,0 +1,35 @@
+specVersion: 0.0.1
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: BalconyDeed
+    network: mainnet
+    source:
+      address: "0x496DFbebe74383B23404BAad89d90D035f357609"
+      abi: BalconyDeed
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - ApprovalForAll
+        - NewDeed
+        - Transfer
+        - UpdateDeed
+      abis:
+        - name: BalconyDeed
+          file: ./abis/BalconyDeed.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,indexed uint256)
+          handler: handleApproval
+        - event: ApprovalForAll(indexed address,indexed address,bool)
+          handler: handleApprovalForAll
+        - event: NewDeed(address,address,uint256,uint256)
+          handler: handleNewDeed
+        - event: Transfer(indexed address,indexed address,indexed uint256)
+          handler: handleTransfer
+        - event: UpdateDeed(address,uint256,uint256)
+          handler: handleUpdateDeed
+      file: ./src/mapping.ts
