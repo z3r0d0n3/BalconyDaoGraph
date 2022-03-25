@@ -1,6 +1,22 @@
-type ExampleEntity @entity {
+# type ExampleEntity @entity {
+#   id: ID!
+#   count: BigInt!
+#   owner: Bytes! # address
+#   approved: Bytes! # address
+# }
+
+type Participant @entity {
   id: ID!
-  count: BigInt!
-  owner: Bytes! # address
-  approved: Bytes! # address
+  address: Bytes!
+  referals: [Bytes!]
+  deeds: [Deed!]
+  points: BigInt!
+}
+
+type Deed @entity {
+  id: ID!
+  index: BigInt!
+  level: BigInt!
+  initialOnwer: Bytes!
+  currentOwner: Bytes!
 }
